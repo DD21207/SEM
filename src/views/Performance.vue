@@ -1,6 +1,11 @@
 <template>
 	<div class="col-xs-12">
 		<div class="card">
+			<div class="card-header">
+                <div class="card-title">
+                    <div class="title">Settings</div>
+                </div>
+            </div>
             <div class="card-body">
             	<label>
             		Platform:
@@ -8,7 +13,7 @@
 					    v-model="selected_data.Platform"
 					    multiple
 					    collapse-tags
-					    style="margin-left: 5px;"
+					    style="margin-left: 10px;"
 					    placeholder="Please Select" id="Platform">
 					    <el-option
 					      v-for="item in platformList"
@@ -24,8 +29,8 @@
 					    v-model="selected_data.Category"
 					    multiple
 					    collapse-tags
-					    style="margin-left: 5px;"
-					    placeholder="Please Select" id="">
+					    style="margin-left: 10px;"
+					    placeholder="Please Select" id="Category">
 					    <el-option
 					      v-for="item in categoryList"
 					      :key="item.value"
@@ -40,8 +45,8 @@
 					    v-model="selected_data.Brand"
 					    multiple
 					    collapse-tags
-					    style="margin-left: 5px;"
-					    placeholder="Please Select">
+					    style="margin-left: 10px;"
+					    placeholder="Please Select" id="Brand"> 
 					    <el-option
 					      v-for="item in brandList"
 					      :key="item.value"
@@ -50,35 +55,36 @@
 					    </el-option>
 					</el-select>
 				</label>
+				<label>
+					Current Period:
+					<input type="text" id="time">
+				</label>
+				<label>
+					Past Period:
+					<input type="text" id="timePP" disabled v-bind:value="selected_data.PP_start+' ~ '+selected_data.PP_end">
+					
+				</label>
+				<button type="btn" id="confirm_btn" class="btn">Confirm</button>
             </div>
         </div>
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <div class="title">推广账号</div>
+                    <div class="title">I.Brand Overview Performance</div>
                 </div>
             </div>
             <div class="card-body">
-                <table class="datatable table table-striped" cellspacing="0" width="100%" id="starcom_table">
-                    <thead>
-                        <tr>
-                            <th>Platform</th>
-                            <th>Account</th>
-                            <th>Cost</th>
-                            <th>Cost</th>
-                            <th>Impression</th>
-                            <th>Impression</th>
-                            <th>Click</th>
-                            <th>Click</th>
-                            <th>Click%</th>
-                            <th>Click%</th>
-                            <th>CPC</th>
-                            <th>CPC</th>
-                            <th>CPM</th>
-                            <th>CPM</th>
-                        </tr>
-                    </thead>
-                </table>
+                <myTable :tableData="tableData" :Tid="'Overview'"></myTable>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="title">II.Detail Report</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <tableAccounts :tableData="tableData1" :Tid="'Detail'"></tableAccounts>
             </div>
         </div>
     </div>
@@ -88,14 +94,20 @@
 var multipleSelect = require("exports-loader?window.multipleSelect!./multiple-select.js")
 import DateRangePicker from '../../static/js/daterangepicker'
 import DataTable from '../../static/js/jquery.dataTables.min.js'
+import myTable from '@/components/table.vue'
+import tableAccounts from '@/components/tableAccounts.vue'
+
 
 import table_options from '@/chart-options/table_options'
+import table_options1 from '@/chart-options/table_options1'
+
 
 export default{
 	name:'Performance',
 	data(){
 		return{
 			tableData:table_options.data,
+			tableData1:table_options1.data,
 			selected_data:{
 			 	Platform:"",
 			 	Category:"",
@@ -146,6 +158,10 @@ export default{
 			},]
 		}
 	},
+	components: {
+   		myTable,
+   		tableAccounts
+  	},
 	mounted(){
 		this.$nextTick(function() {
 	      this.loadPerformance();
@@ -153,162 +169,83 @@ export default{
 	},
 	methods:{
 		loadPerformance(){
-			var _this= this;
+			var locale = {  
+				"format": 'YYYY-MM-DD',  
+				"separator": " ~ ",
+			}; 
 
-		    $("#starcom_table").DataTable({
-		        "dom": '<"top"fl<"clear">>rt<"bottom"ip<"clear">>',
-		        "data": this.tableData,
-		        "order":[[2,"desc"]],
-		        "columns": [
-		            { "data": "img", render: function(data, type, row, meta) { return '<img src ="' + data + '" width="25px" />' }, "width": "5px", "className": "logo", "orderable": false },
-		            { "data": "Account", render: function(data, type, row) { return '<a href="###">' + data + '</a>'; } },
-		            { "data": "Cost.Value", "className": "td1"},
-		            { "data": "Cost.Value", "className": "td1" },
-		            { "data": "Impression.Value", "className": "td1" },
-		            { "data": "Impression.Value", "className": "td1" },
-		            { "data": "Click.Value", "className": "td1" },
-		            { "data": "Click.Value", "className": "td1" },
-		            { "data": "Click%.Value", "className": "td1" },
-		            { "data": "Click%.Value", "className": "td1" },
-		            { "data": "CPC.Value", "className": "td1" },
-		            { "data": "CPC.Value", "className": "td1" },
-		            { "data": "CPM.Value", "className": "td1" },
-		            { "data": "CPM.Value", "className": "td1" }
-		        ],
-		        "columnDefs": [{
-		            "targets": [2],
-		            "orderData": [3],
-		             "render": function(data, type, full) {
-		                if(full['Cost']['Index'].indexOf('-') == 0){
-		                    var num = '<span class="index1">' + full['Cost']['Index'].replace('-','↓') +'%'+ '</span>';
-		                }else{
-		                    var num = '<span class="index2">' + '↑'+full['Cost']['Index'] + '%'+'</span>';
-		                }
-		                
-		                 return '<span>' +'￥'+ _this.formatNumber(data) + '</span>' + '</br>' + num ;
-		             }
-		        }, {
-		            "visible": false,
-		            "targets": [3],
-		        },{
-		            "targets": [4],
-		            "orderData": [5],
-		            "render": function(data, type, full) {
-		                if(full['Impression']['Index'].indexOf('-') == 0){
-		                    var num = '<span class="index1">' + full['Impression']['Index'].replace('-','↓') + '%'+'</span>';
-		                }else{
-		                    var num = '<span class="index2">' + '↑'+full['Impression']['Index'] +'%'+'</span>';
-		                }
-		                 return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
-		             }
-		        }, {
-		            "visible": false,
-		            "targets": [5],
-		        },{
-		            "targets": [6],
-		            "orderData": [7],
-		            "render": function(data, type, full) {
-		                if(full['Click']['Index'].indexOf('-') == 0){
-		                    var num = '<span class="index1">' + full['Click']['Index'].replace('-','↓') + '%'+'</span>';
-		                }else{
-		                    var num = '<span class="index2">' + '↑'+full['Click']['Index'] + '%'+'</span>';
-		                }
-		                 return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
-		             }
-		        }, {
-		            "visible": false,
-		            "targets": [7],
-		        },{
-		            "targets": [8],
-		            "orderData": [9],
-		            "render": function(data, type, full) {
-		                if(full['Click%']['Index'].indexOf('-') == 0){
-		                    var num = '<span class="index1">' + full['Click%']['Index'].replace('-','↓') + '%'+'</span>';
-		                }else{
-		                    var num = '<span class="index2">' + '↑'+full['Click%']['Index'] + '%'+'</span>';
-		                }
-		                 return '<span>' + _this.formatNumber(data) +'%'+ '</span>' + '</br>' + num ;
-		             }
-		        }, {
-		            "visible": false,
-		            "targets": [9],
-		        },{
-		            "targets": [10],
-		            "orderData": [11],
-		             "render": function(data, type, full) {
-		                if(full['CPC']['Index'].indexOf('-') == 0){
-		                    var num = '<span class="index1">' + full['CPC']['Index'].replace('-','↓') + '%'+'</span>';
-		                }else{
-		                    var num = '<span class="index2">' + '↑'+full['CPC']['Index'] + '%'+'</span>';
-		                }
-		                 return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
-		             }
-		        }, {
-		            "visible": false,
-		            "targets": [11],
-		        },{
-		            "targets": [12],
-		            "orderData": [13],
-		            "render": function(data, type, full) {
-		                if(full['CPM']['Index'].indexOf('-') == 0){
-		                    var num = '<span class="index1">' + full['CPM']['Index'].replace('-','↓') + '%'+'</span>';
-		                }else{
-		                    var num = '<span class="index2">' + '↑'+full['CPM']['Index'] + '%'+'</span>';
-		                }
-		                 return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
-		             }
-		        }, {
-		            "visible": false,
-		            "targets": [13],
-		        }]
+	        $('#time').daterangepicker({
+	        		"locale": locale,
+	        		'showDropdowns': false,  
+	           		'showWeekNumbers': false,  
+					"ranges" : {  
+					'Past 7 Days': [moment().subtract(7, "days").format("YYYY-MM-DD"),moment().subtract(1, "days").format("YYYY-MM-DD")],  
+					'Past 30 Days': [moment().subtract(30, "days").format("YYYY-MM-DD"),moment().subtract(1, "days").format("YYYY-MM-DD")]
+					},  
+					"opens":"right",  
+					"timePicker":false,  
+					'applyClass':'apply_class',
+					"startDate":moment().subtract(7,'days').format('YYYY-MM-DD'),
+	    			"endDate":moment().subtract(1,'days').format('YYYY-MM-DD')
+					
+	        })
 
-		    })
+	        let timePicker = $("#time").val();
+	  		let startDate = $("#time").val().split(" ~ ")[0].split("-");
+	  		let endDate= $("#time").val().split(" ~ ")[1].split("-");
+
+	  		let strDateS = new Date(startDate[0], startDate[1]-1, startDate[2]);
+			let strDateE = new Date(endDate[0], endDate[1]-1, endDate[2]);
+			let iDays = (parseInt(Math.abs(strDateS - strDateE ) / 1000 / 60 / 60 /24) +1)*2
+
+			this.selected_data.PP_start = moment().subtract(iDays,"days").format("YYYY-MM-DD");
+			this.selected_data.PP_end =  moment().subtract(iDays/2+1,"days").format("YYYY-MM-DD");
+
+			var _this= this
+
+	        $('#time').on('apply.daterangepicker',function(ev, picker) {
+
+				_this.onChangeChart()
+
+			});
 		},
-		formatNumber(num){
-	        var parts = num.toString().split(".");
-	        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");
-	        return parts.join(".");
-    	}
+		onChangeChart(){
+		 	let timePicker = $("#time").val();
+	  		let startDate = $("#time").val().split(" ~ ")[0].split("-");
+	  		let endDate= $("#time").val().split(" ~ ")[1].split("-");
+
+	  		let strDateS = new Date(startDate[0], startDate[1]-1, startDate[2]);
+			let strDateE = new Date(endDate[0], endDate[1]-1, endDate[2]);
+			let iDays = (parseInt(Math.abs(strDateS - strDateE ) / 1000 / 60 / 60 /24) +1)*2
+
+			this.selected_data.PP_start = moment().subtract(iDays,"days").format("YYYY-MM-DD");
+			this.selected_data.PP_end =  moment().subtract(iDays/2+1,"days").format("YYYY-MM-DD");
+		}	
 	}
+
 }
 </script>
 
 <style lang="less" scoped>
-
-.card-body{
-    label{
-        margin-right: 10px;
-    }
-
-
+@mainColor :#22A7F0;
+.card{
+	label{
+		margin-left: 20px;
+	}
+	
+	#timePP{
+		    cursor: not-allowed;
+	}
+	#confirm_btn{
+		background: @mainColor;
+		// border:1px solid @mainColor;
+		margin-top: -2px;
+		color: white;
+		margin-left: 30px;
+		font-weight: bold;
+	}
 }
 
-#Platform{
-        border-radius: 5px;
-        padding: 0 10px;
-        color: #4d4d4d;
-        height: 25px;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-        justify-content: space-between;
-        cursor: pointer;
-        width: 160px;
-        font-size: 10px;
-        -webkit-transform: scale(.98);
-        margin-left: -5px;
-    }   
-
-	
-</style>
-
-
-<style type="text/css" >
-@import '../assets/less/home.less';
 
 </style>
+

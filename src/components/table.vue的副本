@@ -1,0 +1,173 @@
+<template>
+    <div  :tableData='tableData' :Tid="table_id">
+
+        <table class="datatable table table-striped myTable" cellspacing="0" width="100%" v-bind:id="table_id">
+            <thead>
+                <tr>
+                    <th>Platform</th>
+                    <th>Account</th>
+                    <th>Cost</th>
+                    <th>Cost</th>
+                    <th>Impression</th>
+                    <th>Impression</th>
+                    <th>Click</th>
+                    <th>Click</th>
+                    <th>Click%</th>
+                    <th>Click%</th>
+                    <th>CPC</th>
+                    <th>CPC</th>
+                    <th>CPM</th>
+                    <th>CPM</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</template>
+
+<script>
+export default {
+  // 验证类型
+  props: {
+    tableData: {
+      
+    },
+    Tid:String
+  },
+  data(){
+    return {
+      table_id:this.Tid
+    }
+  },
+  filters: {
+  },
+  mounted(){
+        this.$nextTick(function() {
+        this.loadTable();
+      });
+  },
+  methods: {
+      loadTable(){
+        var _this= this;
+
+        $("#"+this.table_id).DataTable({
+
+            "dom": '<"top"fl<"clear">>rt<"bottom"ip<"clear">>',
+            "data": this.tableData,
+            "order":[[2,"desc"]],
+            "columns": [
+                { "data": "img", render: function(data, type, row, meta) { return '<img src ="' + data + '" width="25px" />' }, "width": "5px", "className": "logo", "orderable": false },
+                { "data": "Account" },
+                { "data": "Cost.Value", "className": "td1"},
+                { "data": "Cost.Value", "className": "td1" },
+                { "data": "Impression.Value", "className": "td1" },
+                { "data": "Impression.Value", "className": "td1" },
+                { "data": "Click.Value", "className": "td1" },
+                { "data": "Click.Value", "className": "td1" },
+                { "data": "Click%.Value", "className": "td1" },
+                { "data": "Click%.Value", "className": "td1" },
+                { "data": "CPC.Value", "className": "td1" },
+                { "data": "CPC.Value", "className": "td1" },
+                { "data": "CPM.Value", "className": "td1" },
+                { "data": "CPM.Value", "className": "td1" }
+            ],
+            "columnDefs": [{
+                "targets": [2],
+                "orderData": [3],
+                 "render": function(data, type, full) {
+                    if(full['Cost']['Index'].indexOf('-') == 0){
+                        var num = '<span class="index1">' + full['Cost']['Index'].replace('-','↓') +'%'+ '</span>';
+                    }else{
+                        var num = '<span class="index2">' + '↑'+full['Cost']['Index'] + '%'+'</span>';
+                    }
+                    
+                     return '<span>' +'￥'+ _this.formatNumber(data) + '</span>' + '</br>' + num ;
+                 }
+            }, {
+                "visible": false,
+                "targets": [3],
+            },{
+                "targets": [4],
+                "orderData": [5],
+                "render": function(data, type, full) {
+                    if(full['Impression']['Index'].indexOf('-') == 0){
+                        var num = '<span class="index1">' + full['Impression']['Index'].replace('-','↓') + '%'+'</span>';
+                    }else{
+                        var num = '<span class="index2">' + '↑'+full['Impression']['Index'] +'%'+'</span>';
+                    }
+                     return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
+                 }
+            }, {
+                "visible": false,
+                "targets": [5],
+            },{
+                "targets": [6],
+                "orderData": [7],
+                "render": function(data, type, full) {
+                    if(full['Click']['Index'].indexOf('-') == 0){
+                        var num = '<span class="index1">' + full['Click']['Index'].replace('-','↓') + '%'+'</span>';
+                    }else{
+                        var num = '<span class="index2">' + '↑'+full['Click']['Index'] + '%'+'</span>';
+                    }
+                     return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
+                 }
+            }, {
+                "visible": false,
+                "targets": [7],
+            },{
+                "targets": [8],
+                "orderData": [9],
+                "render": function(data, type, full) {
+                    if(full['Click%']['Index'].indexOf('-') == 0){
+                        var num = '<span class="index1">' + full['Click%']['Index'].replace('-','↓') + '%'+'</span>';
+                    }else{
+                        var num = '<span class="index2">' + '↑'+full['Click%']['Index'] + '%'+'</span>';
+                    }
+                     return '<span>' + _this.formatNumber(data) +'%'+ '</span>' + '</br>' + num ;
+                 }
+            }, {
+                "visible": false,
+                "targets": [9],
+            },{
+                "targets": [10],
+                "orderData": [11],
+                 "render": function(data, type, full) {
+                    if(full['CPC']['Index'].indexOf('-') == 0){
+                        var num = '<span class="index1">' + full['CPC']['Index'].replace('-','↓') + '%'+'</span>';
+                    }else{
+                        var num = '<span class="index2">' + '↑'+full['CPC']['Index'] + '%'+'</span>';
+                    }
+                     return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
+                 }
+            }, {
+                "visible": false,
+                "targets": [11],
+            },{
+                "targets": [12],
+                "orderData": [13],
+                "render": function(data, type, full) {
+                    if(full['CPM']['Index'].indexOf('-') == 0){
+                        var num = '<span class="index1">' + full['CPM']['Index'].replace('-','↓') + '%'+'</span>';
+                    }else{
+                        var num = '<span class="index2">' + '↑'+full['CPM']['Index'] + '%'+'</span>';
+                    }
+                     return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
+                 }
+            }, {
+                "visible": false,
+                "targets": [13],
+            }]
+
+        })
+      },
+      formatNumber(num){
+          var parts = num.toString().split(".");
+          parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");
+          return parts.join(".");
+      }
+  },
+  // watch:{
+  //   'data.series': 'queryTrendData'
+  // },
+}
+</script> 
+
