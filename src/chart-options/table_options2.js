@@ -1,0 +1,88 @@
+module.exports = {
+  "data":[
+    {
+      "Impression": "221344",
+      "Click": "1676",
+      "Spending": "22318496",
+      "Campaign": "baidu-crest8162837mob",
+      "CTR": "4504.04",
+      "CPC":"1018.30",
+      "Daily":"800",
+      "SOI":"200",
+      "SOS":"300",
+      "Bounce":"400",
+      "demo":"0.5",
+      "demo1":"1.2",
+      "demo2":"2.1"
+    },{
+      "Impression": "221344",
+      "Click": "1676",
+      "Spending": "22318496",
+      "Campaign": "baidu-crest8162837mob",
+      "CTR": "4504.04",
+      "CPC":"1018.30",
+      "Daily":"800",
+      "SOI":"200",
+      "SOS":"300",
+      "Bounce":"400",
+      "demo":"0.5",
+      "demo1":"1.2",
+      "demo2":"2.1"
+    },{
+      "Impression": "221344",
+      "Click": "1676",
+      "Spending": "22318496",
+      "Campaign": "baidu-crest8162837mob",
+      "CTR": "4504.04",
+      "CPC":"1018.30",
+      "Daily":"800",
+      "SOI":"200",
+      "SOS":"300",
+      "Bounce":"400",
+      "demo":"0.5",
+      "demo1":"1.2",
+      "demo2":"2.1"
+    },{
+      "Impression": "221344",
+      "Click": "1676",
+      "Spending": "22318496",
+      "Campaign": "baidu-crest8162837mob",
+      "CTR": "4504.04",
+      "CPC":"1018.30",
+      "Daily":"800",
+      "SOI":"200",
+      "SOS":"300",
+      "Bounce":"400",
+      "demo":"0.5",
+      "demo1":"1.2",
+      "demo2":"2.1"
+    },{
+      "Impression": "221344",
+      "Click": "1676",
+      "Spending": "22318496",
+      "Campaign": "baidu-crest8162837mob",
+      "CTR": "4504.04",
+      "CPC":"1018.30",
+      "Daily":"800",
+      "SOI":"200",
+      "SOS":"300",
+      "Bounce":"400",
+      "demo":"0.5",
+      "demo1":"1.2",
+      "demo2":"2.1"
+    },{
+      "Impression": "221344",
+      "Click": "1676",
+      "Spending": "22318496",
+      "Campaign": "baidu-crest8162837mob",
+      "CTR": "4504.04",
+      "CPC":"1018.30",
+      "Daily":"800",
+      "SOI":"200",
+      "SOS":"300",
+      "Bounce":"400",
+      "demo":"0.5",
+      "demo1":"1.2",
+      "demo2":"2.1"
+    },]
+}

@@ -1,5 +1,5 @@
 <template>
-	<div class="col-xs-12">
+	<div class="col-xs-12" id="Performance">
 		<div class="card">
 			<div class="card-header">
                 <div class="card-title">
@@ -84,7 +84,36 @@
                 </div>
             </div>
             <div class="card-body">
-                <tableAccounts :tableData="tableData1" :Tid="'Detail'"></tableAccounts>
+            	 <el-tabs  type="card" >
+				    <el-tab-pane >
+				    	<span slot="label">Accounts</span>
+				    	<div>
+				    		<tableAccounts :tableData="tableData1" :Tid="'Detail'"></tableAccounts>
+				    	</div>
+					</el-tab-pane>
+				    <el-tab-pane >
+				    	<span slot="label">Campaign</span>
+				    	<div>
+							<tableCampaign :tableData="tableData2"></tableCampaign>
+				    	</div>
+					</el-tab-pane>
+					<el-tab-pane >
+				    	<span slot="label">Group</span>
+				    	<div>sdsd</div>
+					</el-tab-pane>
+					<el-tab-pane >
+				    	<span slot="label">Keyword</span>
+				    	<div>sdsd</div>
+					</el-tab-pane>
+					<el-tab-pane >
+				    	<span slot="label">Adcopy</span>
+				    	<div>sdsd</div>
+					</el-tab-pane>
+					<el-tab-pane >
+				    	<span slot="label">分组监控</span>
+				    	<div>sdsd</div>
+					</el-tab-pane>
+				  </el-tabs>
             </div>
         </div>
     </div>
@@ -94,12 +123,19 @@
 var multipleSelect = require("exports-loader?window.multipleSelect!./multiple-select.js")
 import DateRangePicker from '../../static/js/daterangepicker'
 import DataTable from '../../static/js/jquery.dataTables.min.js'
-import myTable from '@/components/table.vue'
+import myTable from '@/components/tableOverview.vue'
 import tableAccounts from '@/components/tableAccounts.vue'
+import tableCampaign from '@/components/tableCampaign.vue'
+
+
+
 
 
 import table_options from '@/chart-options/table_options'
 import table_options1 from '@/chart-options/table_options1'
+import table_options2 from '@/chart-options/table_options2'
+
+
 
 
 export default{
@@ -108,6 +144,7 @@ export default{
 		return{
 			tableData:table_options.data,
 			tableData1:table_options1.data,
+			tableData2:table_options2.data,
 			selected_data:{
 			 	Platform:"",
 			 	Category:"",
@@ -155,12 +192,14 @@ export default{
 				value:"Tampax"
 			},{
 				value:"Whisper"
-			},]
+			}],
+			activeDetail:""
 		}
 	},
 	components: {
    		myTable,
-   		tableAccounts
+   		tableAccounts,
+   		tableCampaign
   	},
 	mounted(){
 		this.$nextTick(function() {
@@ -228,7 +267,7 @@ export default{
 
 <style lang="less" scoped>
 @mainColor :#22A7F0;
-.card{
+#Performance .card{
 	label{
 		margin-left: 20px;
 	}
@@ -244,8 +283,24 @@ export default{
 		margin-left: 30px;
 		font-weight: bold;
 	}
+
+
 }
 
+	
 
+
+</style>
+<style type="text/css">
+#Performance .el-tabs__item.is-active {
+    	background: #fff;
+
+}
+
+#Performance .el-tabs__item{
+	background: #e3f3ff;
+	color: #22A7F0;
+	font-size: 18px;
+}
 </style>
 

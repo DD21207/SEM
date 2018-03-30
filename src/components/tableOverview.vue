@@ -1,6 +1,5 @@
 <template>
     <div  :tableData='tableData' :Tid="table_id">
-
         <table class="datatable table table-striped myTable" cellspacing="0" width="100%" v-bind:id="table_id">
             <thead>
                 <tr>

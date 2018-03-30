@@ -72,7 +72,7 @@ module.exports = {
       },
       "AccountID": "22318496",
       "Account": {
-        "Value":"Mobile",
+        "Value":"PC",
         "PP":"Vs. PP"
       },
       "Spending": {
@@ -114,7 +114,7 @@ module.exports = {
       },
       "AccountID": "22318496",
       "Account": {
-        "Value":"Mobile",
+        "Value":"Total",
         "PP":"Vs. PP"
       },
       "Spending": {
