@@ -6,18 +6,17 @@
               编辑<i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="a">修改预算</el-dropdown-item>
-              <el-dropdown-item disabled command="a">启用</el-dropdown-item>
-              <el-dropdown-item command="b">暂停</el-dropdown-item>
-              <el-dropdown-item command="a">删除</el-dropdown-item>
-              <el-dropdown-item command="a">展现方式</el-dropdown-item>
-              <el-dropdown-item command="a">设置搜索意图定位</el-dropdown-item>
-              <el-dropdown-item disabled command="a">修改移动出价比例</el-dropdown-item>
-              <el-dropdown-item command="a">修改计算机出价比例</el-dropdown-item>
-              <el-dropdown-item command="a">设置高级精确匹配</el-dropdown-item>
-              <el-dropdown-item command="a">设置同台展现</el-dropdown-item>
-              <el-dropdown-item command="a">设置目标客户追投</el-dropdown-item>
-           
+              <el-dropdown-item command="1">修改预算</el-dropdown-item>
+              <el-dropdown-item disabled command="2">启用</el-dropdown-item>
+              <el-dropdown-item command="3">暂停</el-dropdown-item>
+              <el-dropdown-item command="4">删除</el-dropdown-item>
+              <el-dropdown-item command="5">展现方式</el-dropdown-item>
+              <el-dropdown-item command="6">设置搜索意图定位</el-dropdown-item>
+              <el-dropdown-item disabled command="7">修改移动出价比例</el-dropdown-item>
+              <el-dropdown-item command="8">修改计算机出价比例</el-dropdown-item>
+              <el-dropdown-item command="9">设置高级精确匹配</el-dropdown-item>
+              <el-dropdown-item command="10">设置同台展现</el-dropdown-item>
+              <el-dropdown-item command="11">设置目标客户追投</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           <el-dropdown @command="handleCommand">
@@ -25,18 +24,21 @@
               查看报告<i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="a">计划报告</el-dropdown-item>
-              <el-dropdown-item command="a">搜索词报告</el-dropdown-item>
-              <el-dropdown-item command="b">排名分析报告</el-dropdown-item>
-              <el-dropdown-item command="a">精准匹配报告</el-dropdown-item>
-              <el-dropdown-item command="a">自定义报告</el-dropdown-item>
-              <el-dropdown-item command="a">历史操作报告</el-dropdown-item>
+              <el-dropdown-item command="1">计划报告</el-dropdown-item>
+              <el-dropdown-item command="2">搜索词报告</el-dropdown-item>
+              <el-dropdown-item command="3">排名分析报告</el-dropdown-item>
+              <el-dropdown-item command="4">精准匹配报告</el-dropdown-item>
+              <el-dropdown-item command="customRepory">自定义报告</el-dropdown-item>
+              <el-dropdown-item command="6">历史操作报告</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           <el-dropdown @command="handleCommand" class="custom">
             <el-button >
               自定义列<i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
+             <el-dropdown-menu slot="dropdown">
+              
+            </el-dropdown-menu>
           </el-dropdown>
         </div>
         <div class="table_box">
@@ -101,6 +103,7 @@
 </template>
 
 <script>
+import Bus from './bus.js'
 export default {
   // 验证类型
   props: {
@@ -111,25 +114,34 @@ export default {
   },
   data(){
     return {
-      table_id:this.Tid
+      table_id:this.Tid,
+     
     }
   },
   filters: {
   },
   mounted(){
-        this.$nextTick(function() {
+      this.$nextTick(function() {
         this.loadTable();
       });
   },
   methods: {
       loadTable(){
-        
+       
       },
       handleCommand(command){
-        this.$message('click on item ' + command);
+        if(command == "customRepory"){
+          this.$router.push('/Custom')
+        }
       }
       
   },
+  created(){
+     Bus.$on('selected_data', data =>{
+      // this.test = data;
+      // console.log(data);
+     })
+  }
   // watch:{
   //   'data.series': 'queryTrendData'
   // },

@@ -5,6 +5,7 @@ import Hello from '@/components/Hello'
 import Home from '@/views/Home'
 import Performance from '@/views/Performance'
 import Competitor from '@/views/Competitor'
+import Custom from '@/views/Custom'
 import SEO from '@/views/SEO'
 
 
@@ -33,6 +34,10 @@ export default new Router({
     	path:'SEO',
     	name:'SEO',
     	component:SEO
+    },{
+        path:'Custom',
+        name:'Custom',
+        component:Custom
     }]
   }]
 })

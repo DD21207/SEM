@@ -64,7 +64,7 @@
 					<input type="text" id="timePP" disabled v-bind:value="selected_data.PP_start+' ~ '+selected_data.PP_end">
 					
 				</label>
-				<button type="btn" id="confirm_btn" class="btn">Confirm</button>
+				<button type="btn" id="confirm_btn" class="btn" @click="confirmSelect()">Confirm</button>
             </div>
         </div>
         <div class="card">
@@ -127,9 +127,8 @@ import myTable from '@/components/tableOverview.vue'
 import tableAccounts from '@/components/tableAccounts.vue'
 import tableCampaign from '@/components/tableCampaign.vue'
 
-
-
-
+//Bus 全局变量存放
+import Bus from '@/components/bus.js'
 
 import table_options from '@/chart-options/table_options'
 import table_options1 from '@/chart-options/table_options1'
@@ -229,16 +228,20 @@ export default{
 					
 	        })
 
+
 	        let timePicker = $("#time").val();
 	  		let startDate = $("#time").val().split(" ~ ")[0].split("-");
 	  		let endDate= $("#time").val().split(" ~ ")[1].split("-");
 
 	  		let strDateS = new Date(startDate[0], startDate[1]-1, startDate[2]);
 			let strDateE = new Date(endDate[0], endDate[1]-1, endDate[2]);
-			let iDays = (parseInt(Math.abs(strDateS - strDateE ) / 1000 / 60 / 60 /24) +1)*2
+			let iDays = parseInt(Math.abs(strDateS - strDateE ) / 1000 / 60 / 60 /24) +1
+		
 
-			this.selected_data.PP_start = moment().subtract(iDays,"days").format("YYYY-MM-DD");
-			this.selected_data.PP_end =  moment().subtract(iDays/2+1,"days").format("YYYY-MM-DD");
+	        this.selected_data.CP_start = $("#time").val().split(" ~ ")[0];
+	        this.selected_data.CP_end = $("#time").val().split(" ~ ")[1];
+			this.selected_data.PP_start = moment($("#time").val().split(" ~ ")[0]).subtract(iDays,"days").format("YYYY-MM-DD");
+			this.selected_data.PP_end =  moment($("#time").val().split(" ~ ")[1]).subtract(iDays,"days").format("YYYY-MM-DD");
 
 			var _this= this
 
@@ -255,11 +258,18 @@ export default{
 
 	  		let strDateS = new Date(startDate[0], startDate[1]-1, startDate[2]);
 			let strDateE = new Date(endDate[0], endDate[1]-1, endDate[2]);
-			let iDays = (parseInt(Math.abs(strDateS - strDateE ) / 1000 / 60 / 60 /24) +1)*2
+			let iDays = parseInt(Math.abs(strDateS - strDateE ) / 1000 / 60 / 60 /24) +1
+			// console.log(iDays)
 
-			this.selected_data.PP_start = moment().subtract(iDays,"days").format("YYYY-MM-DD");
-			this.selected_data.PP_end =  moment().subtract(iDays/2+1,"days").format("YYYY-MM-DD");
-		}	
+			this.selected_data.PP_start = moment($("#time").val().split(" ~ ")[0]).subtract(iDays,"days").format("YYYY-MM-DD");
+			this.selected_data.PP_end =  moment($("#time").val().split(" ~ ")[1]).subtract(iDays,"days").format("YYYY-MM-DD");
+		},
+		confirmSelect(){
+			Bus.$emit('selected_data',this.selected_data);
+		}
+	},
+	destroyed() {
+	    Bus.$emit('selected_data',this.selected_data);
 	}
 
 }

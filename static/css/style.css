@@ -1848,7 +1848,7 @@ body.login-page .login-footer {
   -ms-flex-pack: justify;
   justify-content: space-between;
   cursor: pointer;
-  width: 160px;
+  width: 180px;
   font-size: 10px;
   -webkit-transform: scale(.98);
   margin-left: -5px;
