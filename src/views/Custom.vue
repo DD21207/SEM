@@ -375,6 +375,8 @@ export default{
 	},
 	methods:{
 		onloadCustom(){
+            // console.log(JSON.parse(sessionStorage.getItem('selected')));
+            // console.log(this.$store.state.selectedData)
             var locale = {  
                 "format": 'YYYY-MM-DD',  
                 "separator": " ~ ",
@@ -445,12 +447,12 @@ export default{
         'options2_selected': 'selectDisabled',
 
     },
-	created(){
-		Bus.$on('selected_data', data =>{
-		 this.selectedData = data;
-		 console.log( this.selectedData)
-		})
-  	}
+	// created(){
+	// 	Bus.$on('selected_data', data =>{
+	// 	 this.selectedData = data;
+	// 	 // console.log( this.selectedData)
+	// 	})
+ //  	}
 }
 </script>
 

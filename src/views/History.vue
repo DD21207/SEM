@@ -1,9 +1,9 @@
 <template>
-	<div class="col-xs-12" id="Competitor">
-       <div class="card">
-           	<div class="card-header">
+	<div class="col-xs-12" id="History">
+        <div class="card">
+			<div class="card-header">
                 <div class="card-title">
-                	<div class="title">Competitor Analysis</div>
+                    <div class="title">历史操作记录 & A/B test效果跟踪</div>
                 </div>
             </div>
             <div class="card-body">
@@ -11,7 +11,7 @@
                 <label>
                     Category:
                     <el-select
-                        v-model="competitorData.Category"
+                        v-model="historyData.Category"
                         multiple
                         collapse-tags
                         style="margin-left: 10px;"
@@ -27,7 +27,7 @@
                 <label>
                     Brand:
                     <el-select
-                        v-model="competitorData.Brand"
+                        v-model="historyData.Brand"
                         multiple
                         collapse-tags
                         style="margin-left: 10px;"
@@ -41,15 +41,15 @@
                     </el-select>
                 </label>
                 <label>
-                    Devices:
+                    Account:
                     <el-select
-                        v-model="competitorData.Devices"
+                        v-model="historyData.Account"
                         multiple
                         collapse-tags
                         style="margin-left: 10px;"
-                        placeholder="Please Select" id="Devices">
+                        placeholder="Please Select" id="Account">
                         <el-option
-                          v-for="item in devicesList"
+                          v-for="item in accountList"
                           :key="item.value"
                           :label="item.value"
                           :value="item.value">
@@ -59,31 +59,15 @@
                 </div>
                 <div class="select_div">
                 <label>
-                    Location:
+                    层次:
                     <el-select
-                        v-model="competitorData.Location"
+                        v-model="historyData.Level"
                         multiple
                         collapse-tags
                         style="margin-left: 10px;"
-                        placeholder="Please Select" id="Location">
+                        placeholder="Please Select" id="Level">
                         <el-option
-                          v-for="item in locationList"
-                          :key="item.value"
-                          :label="item.value"
-                          :value="item.value">
-                        </el-option>
-                    </el-select>
-                </label>
-                 <label>
-                    Pillar:
-                    <el-select
-                        v-model="competitorData.Pillar"
-                        multiple
-                        collapse-tags
-                        style="margin-left: 10px;"
-                        placeholder="Please Select" id="Pillar">
-                        <el-option
-                          v-for="item in pillarList"
+                          v-for="item in levelList"
                           :key="item.value"
                           :label="item.value"
                           :value="item.value">
@@ -91,41 +75,40 @@
                     </el-select>
                 </label>
                 <label>
-                   Time:
-                    <input type="text" id="timeCompetitor">
+                    Current Period:
+                    <input type="text" id="timeCPHistory">
+                </label>
+                <label>
+                    Past Period:
+                    <input type="text" id="timePPHistory">
+                    
                 </label>
                 </div>
                 <button type="btn" id="confirm_btn" class="btn" @click="onChangeTable()">Confirm</button>
+            	
             </div>
-       </div>
+        </div>
         <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <div class="title">Keywords impression & Ranking share overview</div>
-                </div>
-            </div>
+           
             <div class="card-body">
-             	<div class="keywords_box">
-             		<div style="margin-right:10px;">
-             			<Pie :id="'chart_pie'" :data="options_pie" ref="chart_pie"></Pie>
-             		</div>
-             		<div style="margin-left:10px;"></div>
-             	</div>
+                <tableAccounts :tableData="tableData1" :Tid="'Detail'"></tableAccounts>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import Pie from '@/components/Pie.vue'
+import DateRangePicker from '../../static/js/daterangepicker'
+import tableAccounts from '@/components/tableAccounts.vue'
+import table_options1 from '@/chart-options/table_options1'
 
-import optionsPie from '@/chart-options/optionsPie'
 
 export default{
-	name:'Competitor',
+	name:'History',
 	data(){
 		return{
-			categoryList:[{
+            tableData1:table_options1.data,
+            categoryList:[{
                 value:"Babycare"
             },{
                 value:"Laundry"
@@ -140,13 +123,27 @@ export default{
             },{
                 value:"Shave"
             }],
-            devicesList:[{
-                value:"PC"
+            accountList:[{
+                value:"Babycare"
             },{
-                value:"Mobile"
+                value:"Laundry"
+            },{
+                value:"PHC"
+            },{
+                value:"Orlcare"
+            },{
+                value:"Femcare"
             }],
-            locationList:[{
-                value:""
+            levelList:[{
+                value:"账户"
+            },{
+                value:"计划"
+            },{
+                value:"单元"
+            },{
+                value:"关键词"
+            },{
+                value:"创意"
             }],
             brandList:[{
                 value:"Pampers"
@@ -163,32 +160,35 @@ export default{
             },{
                 value:"Whisper"
             }],
-            pillarList:[{
-                value:""
-            }],
-            competitorData:{
-                Devices:"",
+            historyData:{
+                Account:"",
                 Category:"",
                 Brand:"",
-                startTime:"",
-                endTime:"",
-                Location:"",
-                Pillar:""
-
-            },
-            options_pie:optionsPie
-		}
+                CP_start:"",
+                CP_end:"",
+                PP_start:"",
+                PP_end:"",
+                Level:""
+            }
+        }
 	},
 	components: {
-    	Pie
-  	},
+        tableAccounts
+    },
 	mounted(){
 		this.$nextTick(function() {
-	     	this.onloadCompetitor()
+			this.onloadHistory()
 	    });
 	},
 	methods:{
-		onloadCompetitor(){
+		onloadHistory(){
+            this.historyData.Category = JSON.parse(sessionStorage.getItem('selected')).Category;
+            this.historyData.Brand = JSON.parse(sessionStorage.getItem('selected')).Brand;
+            this.historyData.CP_start = JSON.parse(sessionStorage.getItem('selected')).CP_start;
+            this.historyData.CP_end = JSON.parse(sessionStorage.getItem('selected')).CP_end;
+            this.historyData.PP_start = JSON.parse(sessionStorage.getItem('selected')).PP_start;
+            this.historyData.PP_end = JSON.parse(sessionStorage.getItem('selected')).PP_end;
+
 
             let _this = this;
             // console.log(this.$store.state.selectedData)
@@ -197,7 +197,7 @@ export default{
                 "separator": " ~ ",
             }; 
 
-            $('#timeCompetitor').daterangepicker({
+            $('#timeCPHistory').daterangepicker({
                     "locale": locale,
                     'showDropdowns': false,  
                     'showWeekNumbers': false,  
@@ -208,22 +208,49 @@ export default{
                     "opens":"right",  
                     "timePicker":false,  
                     'applyClass':'apply_class',
-                    "startDate":moment().subtract(7,'days').format('YYYY-MM-DD'),
-	    			"endDate":moment().subtract(1,'days').format('YYYY-MM-DD')
+                    "startDate":this.historyData.CP_start,
+                    "endDate":this.historyData.CP_end,
                     
             })
 
-            $('#timeCompetitor').on('apply.daterangepicker',function(ev, picker) {
+            $('#timeCPHistory').on('apply.daterangepicker',function(ev, picker) {
                 // _this.onChangeChart()
             });
 
 
-     
+            $('#timePPHistory').daterangepicker({
+                    "locale": locale,
+                    'showDropdowns': false,  
+                    'showWeekNumbers': false,  
+                    "ranges" : {  
+                    'Past 7 Days': [moment().subtract(7, "days").format("YYYY-MM-DD"),moment().subtract(1, "days").format("YYYY-MM-DD")],  
+                    'Past 30 Days': [moment().subtract(30, "days").format("YYYY-MM-DD"),moment().subtract(1, "days").format("YYYY-MM-DD")]
+                    },  
+                    "opens":"right",  
+                    "timePicker":false,  
+                    'applyClass':'apply_class',
+                    "startDate":this.historyData.PP_start,
+                    "endDate":this.historyData.PP_end,
+                    
+            })
+
+            $('#timePPHistory').on('apply.daterangepicker',function(ev, picker) {
+                // _this.onChangeChart()
+            });
 
     
 
         },
-	}
+        onChangeTable(){
+            // let timePicker = $("#timeCPHistory").val();
+            // this.startDate = $("#timeCPHistory").val().split(" ~ ")[0].split("-");
+            // this.endDate= $("#timeCPHistory").val().split(" ~ ")[1].split("-");
+        },
+
+       
+	},
+
+
 }
 </script>
 
@@ -243,19 +270,4 @@ export default{
  /*   margin-left: 30px;*/
     font-weight: bold;
 }
-
-.keywords_box{
-	width: 100%;
-	height:350px;
-	display: -webkit-flex; /* Safari */
-	display: flex;
-}
-
-.keywords_box>div{
-	flex: 1;
-	height: 100%;
-	border:1px solid lightgrey;
-}
-
-	
 </style>

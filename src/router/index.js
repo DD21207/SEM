@@ -6,6 +6,7 @@ import Home from '@/views/Home'
 import Performance from '@/views/Performance'
 import Competitor from '@/views/Competitor'
 import Custom from '@/views/Custom'
+import History from '@/views/History'
 import SEO from '@/views/SEO'
 
 
@@ -38,6 +39,10 @@ export default new Router({
         path:'Custom',
         name:'Custom',
         component:Custom
+    },{
+        path:'History',
+        name:'History',
+        component:History
     }]
   }]
 })

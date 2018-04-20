@@ -77,6 +77,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
 import moment from 'moment'
 import axios from 'axios'
+import Vuex from 'vuex'
+import store from './store/store'
+
+Vue.use(Vuex)
 
 
 
@@ -164,6 +168,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App },
 })

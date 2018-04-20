@@ -145,6 +145,7 @@ export default{
 			tableData1:table_options1.data,
 			tableData2:table_options2.data,
 			selected_data:{
+				Account:"",
 			 	Platform:"",
 			 	Category:"",
 			 	Brand:"",
@@ -207,6 +208,7 @@ export default{
 	},
 	methods:{
 		loadPerformance(){
+			this.selected_data = JSON.parse(sessionStorage.getItem('selected'));
 			var locale = {  
 				"format": 'YYYY-MM-DD',  
 				"separator": " ~ ",
@@ -265,11 +267,11 @@ export default{
 			this.selected_data.PP_end =  moment($("#time").val().split(" ~ ")[1]).subtract(iDays,"days").format("YYYY-MM-DD");
 		},
 		confirmSelect(){
-			Bus.$emit('selected_data',this.selected_data);
+			this.$store.commit('setData',this.selected_data);
 		}
 	},
 	destroyed() {
-	    Bus.$emit('selected_data',this.selected_data);
+	    this.$store.commit('setData',this.selected_data);
 	}
 
 }

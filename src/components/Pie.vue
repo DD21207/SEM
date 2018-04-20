@@ -1,12 +1,13 @@
 <template>
-  <div class="x-bar">
     <div :id="id"
-    :data="data"></div>
-  </div>
+    :data="data" class="chart_container">
+      
+    </div>
+
 </template>
 
 <script>
-import HighCharts from 'highcharts'
+import Highcharts from 'highcharts'
 export default {
   // 验证类型
   props: {
@@ -14,31 +15,32 @@ export default {
       type: String
     },
     data: {
-     
+      
     }
   },
   data(){
     return {
+      chart:null,
       option:{
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
         },
-        colors:['#4AC7DC','#E96C39'],
+        // colors:['#4AC7DC','#E96C39'],
         title: {
-            useHTML:true,
-            text: "Volume<br>"+this.data.dataCount,
-            floating:true,
-            // verticalAlign: 'middle',
-            x: -40,
-            y:80,
-            style:{
-              "fontSize":"13px"
-            }
+            text:null
+            // useHTML:true,
+            // text: "Volume<br>"+this.data.dataCount,
+            // floating:true,
+            // // verticalAlign: 'middle',
+            // x: -40,
+            // y:80,
+            // style:{
+            //   "fontSize":"13px"
+            // }
         },
-
-         credits: {
+        credits: {
           enabled: false
         },
         legend:{
@@ -56,28 +58,43 @@ export default {
                 dataLabels: {
                     enabled: false,
                     style: {
-                        color: (HighCharts.theme && HighCharts.theme.contrastTextColor) || 'black'
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                     }
                 },
                 showInLegend: true
             }
         },
-        series: this.data.series
+        series: this.data.data.series
     }
     }
   },
   mounted(){
-    HighCharts.chart(this.id,this.option)
+    this.$nextTick(function() {
+      this.initChart();
+    });
+  
   },
-  methods: {  
-        queryTrendData: function(){ 
-          this.option.title.text = "Volume<br>"+this.data.dataCount,
-          this.option.series = this.data.series
-          HighCharts.chart(this.id,this.option)
-        }  
+  methods: {
+      initChart(){
+          let _this = this;
+        
+          this.chart = new Highcharts.Chart(this.$el, this.option);
+      },
+      queryTrendData: function(){ 
+        // this.option.title.text = "Volume<br>"+this.data.dataCount,
+        // this.option.series = this.data.data.series
+        this.chart.series[0].update( this.data.data.series)
+      }  
     }, 
   watch:{
     'data.series': 'queryTrendData'
   },
 }
-</script> 
+</script>
+
+<style type="text/css">
+.chart_container{
+  width: 100%;height: 100%;
+}
+   
+ </style> 

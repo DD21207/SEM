@@ -28,8 +28,8 @@
               <el-dropdown-item command="2">搜索词报告</el-dropdown-item>
               <el-dropdown-item command="3">排名分析报告</el-dropdown-item>
               <el-dropdown-item command="4">精准匹配报告</el-dropdown-item>
-              <el-dropdown-item command="customRepory">自定义报告</el-dropdown-item>
-              <el-dropdown-item command="6">历史操作报告</el-dropdown-item>
+              <el-dropdown-item command="customReport">自定义报告</el-dropdown-item>
+              <el-dropdown-item command="historyReport">历史操作报告</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           <el-dropdown @command="handleCommand" class="custom">
@@ -130,8 +130,10 @@ export default {
        
       },
       handleCommand(command){
-        if(command == "customRepory"){
+        if(command == "customReport"){
           this.$router.push('/Custom')
+        }else if(command == "historyReport"){
+          this.$router.push('/History')
         }
       }
       

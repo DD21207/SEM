@@ -1832,7 +1832,7 @@ body.login-page .login-footer {
 }
 
 
-#Platform,#Category,#Brand{
+#Platform,#Category,#Brand,#Level,#Devices,#Location,#Pillar{
   border-radius: 5px;
   padding: 0 10px;
 
@@ -1855,6 +1855,18 @@ body.login-page .login-footer {
 }
 
 #time,#timePP{
+    margin-left: 10px;
+    border-radius: 5px;
+    padding:0 10px;
+    width: 170px;
+    border:1px solid #dcdfe6;
+    font-size: 11px;
+    height: 35px;
+    color: #353d47;
+}
+
+
+#timePPHistory,#timeCPHistory,#timeCompetitor{
     margin-left: 10px;
     border-radius: 5px;
     padding:0 10px;
