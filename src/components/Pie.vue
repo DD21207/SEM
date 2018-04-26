@@ -94,7 +94,7 @@ export default {
 
 <style type="text/css">
 .chart_container{
-  width: 100%;height: 100%;
+  width: 100%;height: calc(100% - 50px);
 }
    
  </style> 

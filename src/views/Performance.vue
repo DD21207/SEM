@@ -208,7 +208,7 @@ export default{
 	},
 	methods:{
 		loadPerformance(){
-			this.selected_data = JSON.parse(sessionStorage.getItem('selected'));
+			
 			var locale = {  
 				"format": 'YYYY-MM-DD',  
 				"separator": " ~ ",

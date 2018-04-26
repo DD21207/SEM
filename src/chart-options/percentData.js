@@ -1,0 +1,22 @@
+module.exports = {
+	data:[{
+		name:"Pampers",
+		percent:20.33
+	},
+	{
+		name:"Merries",
+		percent:17.34
+	},
+	{
+		name:"Huggies",
+		percent:13.37
+	},
+	{
+		name:"Goon",
+		percent:6.28
+	},
+	{
+		name:"Moony",
+		percent:5.26
+	}]
+}

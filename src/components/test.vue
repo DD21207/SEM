@@ -127,7 +127,7 @@ export default {
           }
         },
         series: [{
-          name: '女',
+          
           color: 'rgba(223, 83, 83, .5)',
           data: this.options.optionData
         }]
@@ -200,7 +200,7 @@ export default {
               y2Pix = yAxis.toPixels(_this.plotArea[0][1]);
           _this.rect = _this.chart.renderer.rect(xPix, yPix, x2Pix - xPix, y2Pix - yPix) 
               .attr({
-              fill: 'rgba(0, 0, 0, 0.3)',
+              fill: ' rgba(255, 178, 178, 1)',
               zIndex: 1
           }).add();
           console.log('当前是第 ' + plot  + ' 象限')
@@ -329,7 +329,7 @@ export default {
               y2Pix = yAxis.toPixels(this.plotArea[0][1]);
           this.rect = this.chart.renderer.rect(xPix, yPix, x2Pix - xPix, y2Pix - yPix) 
               .attr({
-              fill: 'rgba(0, 0, 0, 0.3)',
+              fill: ' rgba(255, 178, 178, 1)',
               zIndex: 1
           })
               .add();
