@@ -11,8 +11,7 @@
             		Platform:
             		<el-select
 					    v-model="selected_data.Platform"
-					    multiple
-					    collapse-tags
+
 					    style="margin-left: 10px;"
 					    placeholder="Please Select" id="Platform">
 					    <el-option
@@ -27,8 +26,7 @@
             		Category:
             		<el-select
 					    v-model="selected_data.Category"
-					    multiple
-					    collapse-tags
+					  
 					    style="margin-left: 10px;"
 					    placeholder="Please Select" id="Category">
 					    <el-option
@@ -43,8 +41,7 @@
             		Brand:
             		<el-select
 					    v-model="selected_data.Brand"
-					    multiple
-					    collapse-tags
+
 					    style="margin-left: 10px;"
 					    placeholder="Please Select" id="Brand"> 
 					    <el-option
@@ -99,19 +96,25 @@
 					</el-tab-pane>
 					<el-tab-pane >
 				    	<span slot="label">Group</span>
-				    	<div>sdsd</div>
+				    	<div>
+				    		<tableGroup :tableData="tableGroupData"></tableGroup>
+				    	</div>
 					</el-tab-pane>
 					<el-tab-pane >
 				    	<span slot="label">Keyword</span>
-				    	<div>sdsd</div>
+				    	<div>
+				    		<tableKeyword :tableData="tableKeywordData"></tableKeyword>
+				    	</div>
 					</el-tab-pane>
 					<el-tab-pane >
 				    	<span slot="label">Adcopy</span>
-				    	<div>sdsd</div>
+				    	<div>
+				    		<tableAdcopy :tableData="tableAdcopyData"></tableAdcopy>
+				    	</div>
 					</el-tab-pane>
 					<el-tab-pane >
 				    	<span slot="label">分组监控</span>
-				    	<div>sdsd</div>
+				    	<div><tableMonitor :tableData="tableMonitorData"></tableMonitor></div>
 					</el-tab-pane>
 				  </el-tabs>
             </div>
@@ -126,13 +129,29 @@ import DataTable from '../../static/js/jquery.dataTables.min.js'
 import myTable from '@/components/tableOverview.vue'
 import tableAccounts from '@/components/tableAccounts.vue'
 import tableCampaign from '@/components/tableCampaign.vue'
+import tableGroup from '@/components/tableGroup.vue'
+import tableKeyword from '@/components/tableKeyword.vue'
+import tableMonitor from '@/components/tableMonitor.vue'
+import tableAdcopy from '@/components/tableAdcopy.vue'
+
+
+
+
 
 //Bus 全局变量存放
 import Bus from '@/components/bus.js'
 
 import table_options from '@/chart-options/table_options'
-import table_options1 from '@/chart-options/table_options1'
-import table_options2 from '@/chart-options/table_options2'
+import table_options1 from '@/chart-options/tableAccountData'
+import table_options2 from '@/chart-options/tableCampaignData'
+import tableGroupData from '@/chart-options/tableGroupData'
+import tableKeywordData from '@/chart-options/tableKeywordData'
+import tableMonitorData from '@/chart-options/tableMonitorData'
+import tableAdcopyData from '@/chart-options/tableAdcopyData'
+
+
+
+
 
 
 
@@ -144,11 +163,15 @@ export default{
 			tableData:table_options.data,
 			tableData1:table_options1.data,
 			tableData2:table_options2.data,
+			tableGroupData:tableGroupData.data,
+			tableKeywordData:tableKeywordData.data,
+			tableMonitorData:tableMonitorData.data,
+			tableAdcopyData:tableAdcopyData.data,
 			selected_data:{
 				Account:"",
-			 	Platform:"",
-			 	Category:"",
-			 	Brand:"",
+			 	Platform:"Baidu",
+			 	Category:"Babycare",
+			 	Brand:"Pampers",
 			 	CP_start:"",
 			 	CP_end:"",
 			 	PP_start:"",
@@ -199,7 +222,11 @@ export default{
 	components: {
    		myTable,
    		tableAccounts,
-   		tableCampaign
+   		tableCampaign,
+   		tableGroup,
+   		tableKeyword,
+   		tableMonitor,
+   		tableAdcopy
   	},
 	mounted(){
 		this.$nextTick(function() {
@@ -225,8 +252,10 @@ export default{
 					"opens":"right",  
 					"timePicker":false,  
 					'applyClass':'apply_class',
-					"startDate":moment().subtract(7,'days').format('YYYY-MM-DD'),
-	    			"endDate":moment().subtract(1,'days').format('YYYY-MM-DD')
+					// "startDate":moment().subtract(7,'days').format('YYYY-MM-DD'),
+	    // 			"endDate":moment().subtract(1,'days').format('YYYY-MM-DD')
+	    			"startDate":"2018-03-01",
+	    			"endDate":"2018-03-31"
 					
 	        })
 

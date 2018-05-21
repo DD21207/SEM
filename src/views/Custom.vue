@@ -11,7 +11,7 @@
                     Current Period:
                     <input type="text" id="timeCustom">
                 </label>
-                <label>
+                <label style="margin-left:20px;">
                     X轴:
                     <el-select
                         v-model="options1_selected"
@@ -26,7 +26,7 @@
                         </el-option>
                     </el-select>
                 </label>
-                <label>
+                <label style="margin-left:20px;">
                     Y轴:
                     <el-select
                         v-model="options2_selected"

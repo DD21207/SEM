@@ -29,6 +29,7 @@ import Highcharts from 'highcharts/highstock';
 import HighchartsMore from 'highcharts/highcharts-more';
 import HighchartsDrilldown from 'highcharts/modules/drilldown';
 import Highcharts3D from 'highcharts/highcharts-3d';
+import { extend, isNull } from 'underscore';
 HighchartsMore(Highcharts)
 HighchartsDrilldown(Highcharts);
 Highcharts3D(Highcharts);
@@ -141,6 +142,19 @@ export default {
   },
   methods: {
     initChart() {
+
+        if (isNull(this.options)) {
+          this.chart.showLoading();
+          return;
+        } else if (this.options === 'nodata') {
+          this.chart.hideLoading();
+          return;
+        }
+
+        if (this.options.optionData.length == 0) {
+          this.chart.showLoading();
+          return;
+        } 
       //获取当前组件
       // console.log(this.$el);
       // this.$el.style.width = (this.styles.width || 800) + 'px';

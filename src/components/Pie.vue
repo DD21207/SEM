@@ -64,7 +64,7 @@ export default {
                 showInLegend: true
             }
         },
-        series: this.data.data.series
+        series: this.data.series
     }
     }
   },
@@ -83,7 +83,7 @@ export default {
       queryTrendData: function(){ 
         // this.option.title.text = "Volume<br>"+this.data.dataCount,
         // this.option.series = this.data.data.series
-        this.chart.series[0].update( this.data.data.series)
+        this.chart.series[0].update( this.data.series)
       }  
     }, 
   watch:{

@@ -3,92 +3,92 @@ module.exports = {
 		"PG":{
 			"name":"Pamers",
 			"chartData": [
-			{
-		      "name": "通用",
+		   {
+		      "name": "干爽",
 		      "value": 428
 		    },
 		    {
-		      "name": "别克",
+		      "name": "好用",
 		      "value": 278
 		    },
 		    {
-		      "name": "现在",
+		      "name": "超薄",
 		      "value": 232
 		    },
 		    {
-		      "name": "没有",
+		      "name": "不错",
 		      "value": 218
 		    },
 		    {
-		      "name": "三缸",
+		      "name": "透气",
 		      "value": 192
 		    },
 		    {
-		      "name": "一个",
+		      "name": "柔软",
 		      "value": 188
 		    },
 		    {
-		      "name": "不是",
+		      "name": "舒适",
 		      "value": 182
 		    },
 		    {
-		      "name": "面试",
+		      "name": "适合",
 		      "value": 170
 		    },
 		    {
-		      "name": "知道",
+		      "name": "优质",
 		      "value": 170
 		    },
 		    {
-		      "name": "上汽",
+		      "name": "便宜",
 		      "value": 168
 		    },
 		    {
-		      "name": "价格",
+		      "name": "大品牌",
 		      "value": 140
 		    },
 		    {
-		      "name": "问题",
+		      "name": "性价比高",
 		      "value": 138
 		    },
 		    {
-		      "name": "英朗",
+		      "name": "实惠",
 		      "value": 138
 		    },
 		    {
-		      "name": "汽车",
+		      "name": "舒服",
 		      "value": 134
 		    },
 		    {
-		      "name": "楼主",
+		      "name": "吸水好",
 		      "value": 112
 		    },
 		    {
-		      "name": "召回",
+		      "name": "方便",
 		      "value": 110
 		    },
 		    {
-		      "name": "发动机",
+		      "name": "放心",
 		      "value": 110
 		    },
 		    {
-		      "name": "请问",
+		      "name": "贴身",
 		      "value": 100
 		    },
 		    {
-		      "name": "结构",
+		      "name": "信赖",
 		      "value": 98
 		    },
 		    {
-		      "name": "一下",
+		      "name": "轻薄",
 		      "value": 98
 		    },
 		    {
-		      "name": "武汉",
+		      "name": "不返潮",
 		      "value": 98
 		    },
 		    {
-		      "name": "应该",
+		      "name": "轻松",
 		      "value": 94
 		    },
 		    {
@@ -96,56 +96,24 @@ module.exports = {
 		      "value": 92
 		    },
 		    {
-		      "name": "公司",
+		      "name": "质量不错",
 		      "value": 92
 		    },
 		    {
-		      "name": "感觉",
+		      "name": "高端",
 		      "value": 90
-		    },
-		    {
-		      "name": "通知",
-		      "value": 88
-		    },
-		    {
-		      "name": "好看",
-		      "value": 86
-		    },
-		    {
-		      "name": "设计",
-		      "value": 82
-		    },
-		    {
-		      "name": "真的",
-		      "value": 80
-		    },
-		    {
-		      "name": "衬套",
-		      "value": 76
-		    },
-		    {
-		      "name": "测评",
-		      "value": 74
-		    },
-		    {
-		      "name": "都",
-		      "value": 74
-		    },
-		    {
-		      "name": "恭喜",
-		      "value": 74
 		    }],
 		    imgList:[{
-		    	url:"test.jpg",
+		    	url:"babycare.jpg",
 		    	tag:""
 		    },{
-		    	url:"test.jpg",
+		    	url:"babycare2.jpg",
 		    	tag:""
 		    },{
-		    	url:"test.jpg",
+		    	url:"product.jpg",
 		    	tag:""
 		    },{
-		    	url:"test.jpg",
+		    	url:"brand.jpg",
 		    	tag:""
 		    }]
 		},
@@ -160,6 +128,10 @@ module.exports = {
 				"value":2
 			},
 			{
+				"name":"DAWANG",
+				"value":5
+			},
+			{
 				"name":"Goon",
 				"value":3
 			},
@@ -167,185 +139,106 @@ module.exports = {
 				"name":"Moony",
 				"value":4
 			}],
-			"chartData1":[{
-		      "name": "中国",
+			"chartData1": [
+		   {
+		      "name": "本土",
+		      "value": 428
+		    },
+		    {
+		      "name": "起坨",
+		      "value": 278
+		    },
+		    {
+		      "name": "干爽",
+		      "value": 232
+		    },
+		    {
+		      "name": "便宜",
+		      "value": 218
+		    },
+		    {
+		      "name": "透气性",
+		      "value": 192
+		    },
+		    {
+		      "name": "红屁屁",
+		      "value": 188
+		    },
+		    {
+		      "name": "假货",
+		      "value": 182
+		    },
+		    {
+		      "name": "超薄",
+		      "value": 170
+		    },
+		    {
+		      "name": "柔软",
+		      "value": 170
+		    },
+		    {
+		      "name": "价格",
+		      "value": 168
+		    },
+		    {
+		      "name": "适合",
+		      "value": 140
+		    },
+		    {
+		      "name": "试试",
+		      "value": 138
+		    },
+		    {
+		      "name": "吸水性",
+		      "value": 138
+		    },
+		    {
+		      "name": "皮肤",
+		      "value": 134
+		    },
+		    {
+		      "name": "原装",
+		      "value": 112
+		    },
+		    {
+		      "name": "可爱",
+		      "value": 110
+		    },
+		    {
+		      "name": "官方",
+		      "value": 110
+		    },
+		    {
+		      "name": "不过敏",
+		      "value": 100
+		    },
+		    {
+		      "name": "娇嫩",
 		      "value": 98
 		    },
 		    {
-		      "name": "觉得",
-		      "value": 74
+		      "name": "大牌子",
+		      "value": 98
 		    },
 		    {
-		      "name": "不错",
-		      "value": 72
+		      "name": "良心",
+		      "value": 98
 		    },
 		    {
-		      "name": "动力",
-		      "value": 72
+		      "name": "轻松",
+		      "value": 94
 		    },
 		    {
-		      "name": "优惠",
-		      "value": 70
+		      "name": "不漏",
+		      "value": 92
 		    },
 		    {
-		      "name": "工作",
-		      "value": 70
+		      "name": "超薄",
+		      "value": 92
 		    },
 		    {
-		      "name": "车型",
-		      "value": 68
-		    },
-		    {
-		      "name": "大众",
-		      "value": 66
-		    },
-		    {
-		      "name": "是不是",
-		      "value": 64
-		    },
-		    {
-		      "name": "月",
-		      "value": 64
-		    },
-		    {
-		      "name": "有没有",
-		      "value": 62
-		    },
-		    {
-		      "name": "还",
-		      "value": 62
-		    },
-		    {
-		      "name": "进",
-		      "value": 62
-		    },
-		    {
-		      "name": "不会",
-		      "value": 62
-		    },
-		    {
-		      "name": "想",
-		      "value": 60
-		    },
-		    {
-		      "name": "不",
-		      "value": 60
-		    },
-		    {
-		      "name": "宝马",
-		      "value": 58
-		    },
-		    {
-		      "name": "不能",
-		      "value": 58
-		    },
-		    {
-		      "name": "品牌",
-		      "value": 56
-		    },
-		    {
-		      "name": "体检",
-		      "value": 56
-		    },
-		    {
-		      "name": "没",
-		      "value": 54
-		    },
-		    {
-		      "name": "说",
-		      "value": 54
-		    },
-		    {
-		      "name": "谢谢",
-		      "value": 54
-		    },
-		    {
-		      "name": "这车",
-		      "value": 54
-		    },
-		    {
-		      "name": "内饰",
-		      "value": 52
-		    },
-		    {
-		      "name": "看看",
-		      "value": 52
-		    },
-		    {
-		      "name": "去",
-		      "value": 52
-		    },
-		    {
-		      "name": "SUV",
-		      "value": 52
-		    },
-		    {
-		      "name": "雪佛兰",
-		      "value": 50
-		    },
-		    {
-		      "name": "一直",
-		      "value": 50
-		    },
-		    {
-		      "name": "需要",
-		      "value": 50
-		    },
-		    {
-		      "name": "昂科威",
-		      "value": 50
-		    },
-		    {
-		      "name": "上海",
-		      "value": 50
-		    },
-		    {
-		      "name": "不要",
-		      "value": 48
-		    },
-		    {
-		      "name": "凯越",
-		      "value": 48
-		    },
-		    {
-		      "name": "收到",
-		      "value": 48
-		    },
-		    {
-		      "name": "分体",
-		      "value": 48
-		    },
-		    {
-		      "name": "分体式",
-		      "value": 46
-		    },
-		    {
-		      "name": "问",
-		      "value": 44
-		    },
-		    {
-		      "name": "变速箱",
-		      "value": 44
-		    },
-		    {
-		      "name": "旅行",
-		      "value": 44
-		    },
-		    {
-		      "name": "岗位",
-		      "value": 44
-		    },
-		    {
-		      "name": "电话",
-		      "value": 42
-		    },
-		    {
-		      "name": "号",
-		      "value": 42
-		    },
-		    {
-		      "name": "黄轩",
-		      "value": 42
+		      "name": "敏感",
+		      "value": 90
 		    }],
 		    "chartData2":[{
 		      "name": "美国",

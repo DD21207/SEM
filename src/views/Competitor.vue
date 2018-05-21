@@ -3,7 +3,7 @@
        <div class="card">
            	<div class="card-header">
                 <div class="card-title">
-                	<div class="title">Competitor Analysis</div>
+                	<div class="title">Settings</div>
                 </div>
             </div>
             <div class="card-body">
@@ -12,10 +12,9 @@
                     Category:
                     <el-select
                         v-model="competitorData.Category"
-                        multiple
-                        collapse-tags
+                      
                         style="margin-left: 10px;"
-                        placeholder="Please Select" id="Category">
+                        placeholder="Please Select" id="competitorCategory">
                         <el-option
                           v-for="item in categoryList"
                           :key="item.value"
@@ -28,10 +27,9 @@
                     Brand:
                     <el-select
                         v-model="competitorData.Brand"
-                        multiple
-                        collapse-tags
+                      
                         style="margin-left: 10px;"
-                        placeholder="Please Select" id="Brand"> 
+                        placeholder="Please Select" id="competitorBrand"> 
                         <el-option
                           v-for="item in brandList"
                           :key="item.value"
@@ -45,7 +43,7 @@
                     <el-select
                         v-model="competitorData.Devices"
                         multiple
-                        collapse-tags
+                       
                         style="margin-left: 10px;"
                         placeholder="Please Select" id="Devices">
                         <el-option
@@ -107,7 +105,7 @@
             <div class="card-body">
              	<div class="keywords_box">
              		<div style="margin-right:10px;">
-             			<Pie :id="'chart_pie'" :data="options_pie" ref="chart_pie"></Pie>
+             			<Pie :id="'chart_pie'" :data="options_pie.data" ref="chart_pie"></Pie>
                         <div class="more_div">Impression share <a href="javascript:;;">More</a></div>
              		</div>
              		<div style="margin-left:10px;">
@@ -134,7 +132,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <div class="title">SOS的预估方式：展示次数/爬虫爬行次数</div>
+                    <div class="title">Competitor SOS Estimation</div>
                 </div>
             </div>
             <div class="card-body">
@@ -178,14 +176,14 @@
                     </div>
                 </div>
                 <div class="top10_div">
-                     <div class="top10_title">竞品图片标签分TOP10</div>
+                     <div class="top10_title">Ad copy Key Element Analysis</div>
                      <div class="top10_chart_box">
                          <div>
                             <div class="top10_chart_box_title">
                                 {{adcopy_data.PG.name}}
                             </div>
                             <div class="top10_chart_box_content">
-                                <Pie  :data="options_pie" ref="chart_pie"></Pie>
+                                <Pie  :data="options_pie.data1" ref="chart_pie"></Pie>
                             </div>
                          </div>
                          <div>
@@ -200,7 +198,7 @@
                                 </el-select>
                             </div>
                             <div class="top10_chart_box_content">
-                                <Pie  :data="options_pie" ref="chart_pie"></Pie>
+                                <Pie  :data="options_pie.data2" ref="chart_pie"></Pie>
                             </div>
                          </div>
                          <div>
@@ -215,7 +213,7 @@
                                 </el-select>
                             </div>
                             <div class="top10_chart_box_content">
-                                <Pie  :data="options_pie" ref="chart_pie"></Pie>
+                                <Pie  :data="options_pie.data3" ref="chart_pie"></Pie>
                             </div>
                          </div>
                      </div>
@@ -288,9 +286,39 @@ export default{
             },{
                 value:"Mobile"
             }],
-            locationList:[{
-                value:""
-            }],
+            locationList:[
+              {"value":"安徽"},
+              {"value":"北京"},
+              {"value":"福建"},
+              {"value":"甘肃"},
+              {"value":"广东"},
+              {"value":"广西"},
+              {"value":"贵州"},
+              {"value":"海南"},
+              {"value":"河北"},
+              {"value":"河南"},
+              {"value":"黑龙江"},
+              {"value":"湖北"},
+              {"value":"湖南"},
+              {"value":"吉林"},
+              {"value":"江苏"},
+              {"value":"江西"},
+              {"value":"辽宁"},
+              {"value":"内蒙古"},
+              {"value":"宁夏"},
+              {"value":"青海"},
+              {"value":"山东"},
+              {"value":"山西"},
+              {"value":"陕西"},
+              {"value":"上海"},
+              {"value":"四川"},
+              {"value":"天津"},
+              {"value":"西藏"},
+              {"value":"新疆"},
+              {"value":"云南"},
+              {"value":"浙江"},
+              {"value":"重庆"},
+              ],
             brandList:[{
                 value:"Pampers"
             },{
@@ -307,12 +335,16 @@ export default{
                 value:"Whisper"
             }],
             pillarList:[{
-                value:""
+                value:"Pampers Mainline"
+            },{
+              value:"Pampers Premium"
+            },{
+              value:"Pampers Pants"
             }],
             competitorData:{
-                Devices:"",
-                Category:"",
-                Brand:"",
+                Devices:["PC","Mobile"],
+                Category:"Babycare",
+                Brand:"Pampers",
                 startTime:"",
                 endTime:"",
                 Location:"",
@@ -325,16 +357,16 @@ export default{
             adcopy_data:adcopyData.data,
             adcopySelected:1,
             adcopyChartData:adcopyData.data.Non_PG.chartData1,
-            top10selected1:"",
-            top10selected2:"",
+            top10selected1:"Huggies",
+            top10selected2:"DAWANG",
 
 		}
 	},
 	components: {
     	Pie,
-        Proportion,
-        Percent,
-        wordCloud
+      Proportion,
+      Percent,
+      wordCloud
   	},
 	mounted(){
 		this.$nextTick(function() {

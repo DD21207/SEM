@@ -12,8 +12,6 @@
                     Category:
                     <el-select
                         v-model="historyData.Category"
-                        multiple
-                        collapse-tags
                         style="margin-left: 10px;"
                         placeholder="Please Select" id="Category">
                         <el-option
@@ -28,8 +26,6 @@
                     Brand:
                     <el-select
                         v-model="historyData.Brand"
-                        multiple
-                        collapse-tags
                         style="margin-left: 10px;"
                         placeholder="Please Select" id="Brand"> 
                         <el-option
@@ -91,7 +87,7 @@
         <div class="card">
            
             <div class="card-body">
-                <tableAccounts :tableData="tableData1" :Tid="'Detail'"></tableAccounts>
+                <tableTest :tableData="tableData1" :Tid="'Detail'"></tableTest>
             </div>
         </div>
     </div>
@@ -99,15 +95,15 @@
 
 <script>
 import DateRangePicker from '../../static/js/daterangepicker'
-import tableAccounts from '@/components/tableAccounts.vue'
-import table_options1 from '@/chart-options/table_options1'
+import tableTest from '@/components/tableTest.vue'
+import tableTestData from '@/chart-options/tableTestData'
 
 
 export default{
 	name:'History',
 	data(){
 		return{
-            tableData1:table_options1.data,
+            tableData1:tableTestData.data,
             categoryList:[{
                 value:"Babycare"
             },{
@@ -124,15 +120,9 @@ export default{
                 value:"Shave"
             }],
             accountList:[{
-                value:"Babycare"
+                value:"baidu-帮宝适2103988"
             },{
-                value:"Laundry"
-            },{
-                value:"PHC"
-            },{
-                value:"Orlcare"
-            },{
-                value:"Femcare"
+                value:"baidu-帮宝适PCB17KA0853"
             }],
             levelList:[{
                 value:"账户"
@@ -161,9 +151,9 @@ export default{
                 value:"Whisper"
             }],
             historyData:{
-                Account:"",
-                Category:"",
-                Brand:"",
+                Account:["baidu-帮宝适2103988","baidu-帮宝适PCB17KA0853"],
+                Category:"Babycare",
+                Brand:"Pampers",
                 CP_start:"",
                 CP_end:"",
                 PP_start:"",
@@ -173,7 +163,7 @@ export default{
         }
 	},
 	components: {
-        tableAccounts
+        tableTest
     },
 	mounted(){
 		this.$nextTick(function() {

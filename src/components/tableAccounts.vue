@@ -2,7 +2,7 @@
     <div  :tableData='tableData' :Tid="table_id" class="table_div tableAccounts">
         <el-table
           :data="tableData"
-          height="400"
+          height="240"
           :summary-method="getSummaries"
           show-summary
           style="width: 100%;">
@@ -10,7 +10,6 @@
             prop="Account"
             label="Account"
             align="center"
-            
             >
           </el-table-column>
           <el-table-column
@@ -23,35 +22,43 @@
             prop="Impression"
             label="Impression"
             align="right"
-
             sortable>
           </el-table-column>
           <el-table-column
             prop="Click"
             label="Click"
             align="right"
-
             sortable>
           </el-table-column>
           <el-table-column
-            prop="Cost"
-            label="Cost"
+            prop="Spending"
+            label="Spending"
             align="right"
-
+            sortable>
+          </el-table-column>
+          <el-table-column
+            prop="CTR"
+            label="CTR"
+            align="right"
+            :formatter="formatPercent"
+            sortable>
+          </el-table-column>
+          <el-table-column
+            prop="CPC"
+            label="CPC"
+            align="right"
             sortable>
           </el-table-column>
           <el-table-column
             prop="Balance"
             label="Balance"
             align="right"
-
             sortable>
           </el-table-column>
           <el-table-column
             prop="Daily"
             label="Daily Budget"
             align="right"
-
             sortable>
           </el-table-column>
         </el-table>
@@ -83,32 +90,47 @@ export default {
       loadTable(){
         var _this= this;
 
-        $("#"+this.table_id).DataTable({
+        // $("#"+this.table_id).DataTable({
 
-            "dom": '<"top"fl<"clear">>rt<"bottom"ip<"clear">>',
-            "data": this.tableData,
-            "ordering":true,
-            "paging": false,
-            "searching":false,
-            "info":false,
-            "columns": [
-                { "data": "Account" },
-                { "data": "AccountID",},
-                { "data": "Impression.Value", "className": "td1"},
-                { "data": "Click.Value",  "className": "td1"},
-                { "data": "Cost.Value", "className": "td1"},
-                { "data": "Balance.Value", "className": "td1"},
-                { "data": "Daily.Value", "className": "td1"},
-            ],
+        //     "dom": '<"top"fl<"clear">>rt<"bottom"ip<"clear">>',
+        //     "data": this.tableData,
+        //     "ordering":true,
+        //     "paging": false,
+        //     "searching":false,
+        //     "info":false,
+        //     "columns": [
+        //         { "data": "Account" },
+        //         { "data": "AccountID",},
+        //         { "data": "Impression.Value", "className": "td1"},
+        //         { "data": "Click.Value",  "className": "td1"},
+        //         { "data": "Cost.Value", "className": "td1"},
+        //         { "data": "Balance.Value", "className": "td1"},
+        //         { "data": "Daily.Value", "className": "td1"},
+        //     ],
            
 
-        })
+        // })
       },
       formatNumber(num){
           var parts = num.toString().split(".");
           parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");
           return parts.join(".");
       },
+       formatPercent(row, column, cellValue, index){
+          if(cellValue == null ){
+            return "--"
+          }else{
+            return cellValue + '%'
+          }
+        },
+      formatNumber:function(value){
+          if(value == null ){
+            return "--"
+          }else{
+            var re = /(?=(?!\b)(\d{3})+$)/g; 
+          return value.toString().replace(re, ',');
+        }
+    },
       getSummaries(param) {
         const { columns, data } = param;
         const sums = [];
@@ -134,8 +156,15 @@ export default {
           } else {
              sums[index] = '--';
           }
-        });
 
+          if(index === 5){
+              sums[index] = Math.round(sums[3]*100 / sums[2]*100)/100 + '%';
+              return;
+          }else if(index === 6){
+              sums[index] = Math.floor((sums[4] / sums[3]) * 100) / 100;
+              return;
+          }
+        });
         return sums;
       }
   },
@@ -190,7 +219,7 @@ width: 101%;
   
  }
  .tableAccounts .el-table td.is-leaf{
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
 
     color: #333;

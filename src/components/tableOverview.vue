@@ -10,7 +10,7 @@
                     <th>CTR</th>
                     <th>CPC</th>
                     <th>SOI(est.)</th>
-                    <th>SOS(est.)</th>
+                    <!-- <th>SOS(est.)</th> -->
                     <th>Visit</th>
                     <th>Bounce Rate</th>
                 </tr>
@@ -60,7 +60,7 @@ export default {
                 { "data": "CTR.Value", "className": "td1" },
                 { "data": "CPC.Value", "className": "td1" },
                 { "data": "SOI.Value", "className": "td1" },
-                { "data": "SOS.Value", "className": "td1" },
+                // { "data": "SOS.Value", "className": "td1" },
                 { "data": "Visit.Value", "className": "td1" },
                 { "data": "Bounce.Value", "className": "td1" },
             ],
@@ -79,7 +79,7 @@ export default {
                         var num = '<span class="index2">' + '↑'+full['Impression']['PP'] + '%'+'</span>';
                     }
                     
-                     return '<span>' +'￥'+ _this.formatNumber(data) + '</span>' + '</br>' + num ;
+                     return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
                  }
             },{
               "targets": [2],
@@ -90,7 +90,7 @@ export default {
                         var num = '<span class="index2">' + '↑'+full['Click']['PP'] + '%'+'</span>';
                     }
                     
-                     return '<span>' +'￥'+ _this.formatNumber(data) + '</span>' + '</br>' + num ;
+                     return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
                  }
             },{
               "targets": [3],
@@ -101,7 +101,7 @@ export default {
                         var num = '<span class="index2">' + '↑'+full['Spending']['PP'] + '%'+'</span>';
                     }
                     
-                     return '<span>' +'￥'+ _this.formatNumber(data) + '</span>' + '</br>' + num ;
+                     return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
                  }
             },{
               "targets": [4],
@@ -112,7 +112,7 @@ export default {
                         var num = '<span class="index2">' + '↑'+full['CTR']['PP'] + '%'+'</span>';
                     }
                     
-                     return '<span>' +'￥'+ _this.formatNumber(data) + '</span>' + '</br>' + num ;
+                     return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
                  }
             },{
               "targets": [5],
@@ -123,7 +123,7 @@ export default {
                         var num = '<span class="index2">' + '↑'+full['CPC']['PP'] + '%'+'</span>';
                     }
                     
-                     return '<span>' +'￥'+ _this.formatNumber(data) + '</span>' + '</br>' + num ;
+                     return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
                  }
             },{
               "targets": [6],
@@ -134,21 +134,23 @@ export default {
                         var num = '<span class="index2">' + '↑'+full['SOI']['PP'] + '%'+'</span>';
                     }
                     
-                     return '<span>' +'￥'+ _this.formatNumber(data) + '</span>' + '</br>' + num ;
+                     return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
                  }
-            },{
-              "targets": [7],
-                 "render": function(data, type, full) {
-                    if(full['SOS']['PP'].indexOf('-') == 0){
-                        var num = '<span class="index1">' + full['SOS']['PP'].replace('-','↓') +'%'+ '</span>';
-                    }else{
-                        var num = '<span class="index2">' + '↑'+full['SOS']['PP'] + '%'+'</span>';
-                    }
+            },
+            // {
+            //   "targets": [7],
+            //      "render": function(data, type, full) {
+            //         if(full['SOS']['PP'].indexOf('-') == 0){
+            //             var num = '<span class="index1">' + full['SOS']['PP'].replace('-','↓') +'%'+ '</span>';
+            //         }else{
+            //             var num = '<span class="index2">' + '↑'+full['SOS']['PP'] + '%'+'</span>';
+            //         }
                     
-                     return '<span>' +'￥'+ _this.formatNumber(data) + '</span>' + '</br>' + num ;
-                 }
-            },{
-              "targets": [8],
+            //          return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
+            //      }
+            // },
+            {
+              "targets": [7],
                  "render": function(data, type, full) {
                     if(full['Visit']['PP'].indexOf('-') == 0){
                         var num = '<span class="index1">' + full['Visit']['PP'].replace('-','↓') +'%'+ '</span>';
@@ -156,11 +158,11 @@ export default {
                         var num = '<span class="index2">' + '↑'+full['Visit']['PP'] + '%'+'</span>';
                     }
                     
-                     return '<span>' +'￥'+ _this.formatNumber(data) + '</span>' + '</br>' + num ;
+                     return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
                  }
             },
             {
-              "targets": [9],
+              "targets": [8],
                  "render": function(data, type, full) {
                     if(full['Bounce']['PP'].indexOf('-') == 0){
                         var num = '<span class="index1">' + full['Bounce']['PP'].replace('-','↓') +'%'+ '</span>';
@@ -168,7 +170,7 @@ export default {
                         var num = '<span class="index2">' + '↑'+full['Bounce']['PP'] + '%'+'</span>';
                     }
                     
-                     return '<span>' +'￥'+ _this.formatNumber(data) + '</span>' + '</br>' + num ;
+                     return '<span>' + _this.formatNumber(data) + '</span>' + '</br>' + num ;
                  }
             }]
 

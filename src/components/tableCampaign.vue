@@ -44,10 +44,17 @@
         <div class="table_box">
             <el-table
               :data="tableData"
+               height="600"
+              show-summary
+              :summary-method="getSummaries"
               style="width: 100%">
               <el-table-column
                 prop="Campaign"
                 label="Campaign">
+              </el-table-column>
+              <el-table-column
+                prop="Account"
+                label="Account">
               </el-table-column>
               <el-table-column
                 prop="Impression"
@@ -63,39 +70,51 @@
               </el-table-column>
               <el-table-column
                 prop="CTR"
-                label="CTR">
+                label="CTR"
+                :formatter="formatPercent">
               </el-table-column>
               <el-table-column
                 prop="CPC"
                 label="CPC">
               </el-table-column>
               <el-table-column
+                prop="Ranking"
+                label="Ranking">
+              </el-table-column>
+              <el-table-column
                 prop="SOI"
-                label="SOI(est.)">
+                label="SOI(est.)"
+                :formatter="formatPercent">
               </el-table-column>
               <el-table-column
                 prop="SOS"
-                label="SOS(est.)">
+                label="SOS(est.)"
+                :formatter="formatPercent">
               </el-table-column>
               <el-table-column
-                prop="Bounce"
+                prop="Visit"
+                label="Visit"
+                >
+              </el-table-column>
+              <el-table-column
+                prop="Bounce Rate"
                 label="Bounce Rate">
               </el-table-column>
               <el-table-column
-                prop="demo"
-                label="出价比例">
+                prop="Bidding Rate"
+                label="Bidding Rate">
               </el-table-column>
               <el-table-column
-                prop="Daily"
+                prop="Daily Budget"
                 label="Daily Budget">
               </el-table-column>
               <el-table-column
-                prop="demo1"
-                label="推广时段">
+                prop="on- air period"
+                label="on- air period">
               </el-table-column>
               <el-table-column
-                prop="demo2"
-                label="否定关键词">
+                prop="Negative Keyword"
+                label="Negative Keyword">
               </el-table-column>
             </el-table>
         </div>
@@ -135,8 +154,62 @@ export default {
         }else if(command == "historyReport"){
           this.$router.push('/History')
         }
-      }
-      
+      },
+      getSummaries(param) {
+        const { columns, data } = param;
+        const sums = [];
+        columns.forEach((column, index) => {
+          if (index === 0 ) {
+            sums[index] = 'Total';
+            return;
+          }else if(index === 1){
+            sums[index] = '--';
+            return;
+          }
+          const values = data.map(item => Number(item[column.property]));
+          if (!values.every(value => isNaN(value))) {
+            sums[index] = values.reduce((prev, curr) => {
+              const value = Number(curr);
+              if (!isNaN(value)) {
+                return prev + curr;
+              } else {
+                return prev;
+              }
+            }, 0);
+             sums[index] = Math.round(sums[index]*100)/100;
+          } else {
+             sums[index] = '--';
+          }
+
+          if(index === 5){
+              sums[index] = Math.round(sums[3]*100 / sums[2]*100)/100 + '%'
+          }else if(index === 6){
+              sums[index] = Math.floor((sums[4] / sums[3]) * 100) / 100
+          }else if(index === 7){
+            sums[index] = "1.56"
+          }else if( index === 8 || index === 9 || index === 10 || index === 11 || index === 12 ||index === 13 ||index === 14 ||index === 15){
+            sums[index] = '--';
+            return;
+          }
+        });
+        return sums;
+      },
+      formatPercent(row, column, cellValue, index){
+        // console.log(cellValue)
+          if(cellValue == null ){
+            return "--"
+          }else{
+            return cellValue + '%'
+          }
+        },
+      formatNumber:function(value){
+          if(value == null ){
+            return "--"
+          }else{
+            var re = /(?=(?!\b)(\d{3})+$)/g; 
+          return value.toString().replace(re, ',');
+        }
+    },
   },
   created(){
      Bus.$on('selected_data', data =>{
@@ -194,7 +267,7 @@ width: 101%;
   
  }
  .table_box .el-table td.is-leaf{
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
 
     color: #333;

@@ -1,55 +1,79 @@
 module.exports = {
 	"data":{
 		"TOP1":[{
-			name:"demo1",
+			name:"HUGGIES",
 			value:12323,
-			percent:"40%"
+			percent:"45%"
 		},{
-			name:"demo2",
-			value:12323,
-			percent:"30%"
-		},{
-			name:"demo3",
-			value:12323,
-			percent:"20%"
-		},{
-			name:"demo4",
+			name:"PAMPERS",
 			value:12323,
 			percent:"10%"
+		},{
+			name:"DAWANG",
+			value:12323,
+			percent:"45%"
+		},{
+			name:"MUSTELA",
+			value:12323,
+			percent:"0%"
+		},{
+			name:"MAMYPOKO",
+			value:12323,
+			percent:"0%"
+		},{
+			name:"KAO",
+			value:12323,
+			percent:"0%"
 		}],
 		"TOP2":[{
-			name:"demo1",
-			value:12323,
-			percent:"20%"
-		},{
-			name:"demo2",
-			value:12323,
-			percent:"10%"
-		},{
-			name:"demo3",
-			value:12323,
-			percent:"40%"
-		},{
-			name:"demo4",
+			name:"HUGGIES",
 			value:12323,
 			percent:"30%"
+		},{
+			name:"PAMPERS",
+			value:12323,
+			percent:"35%"
+		},{
+			name:"DAWANG",
+			value:12323,
+			percent:"35%"
+		},{
+			name:"MUSTELA",
+			value:12323,
+			percent:"0%"
+		},{
+			name:"MAMYPOKO",
+			value:12323,
+			percent:"0%"
+		},{
+			name:"KAO",
+			value:12323,
+			percent:"0%"
 		}],
 		"TOP3":[{
-			name:"demo1",
+			name:"HUGGIES",
 			value:12323,
-			percent:"30%"
+			percent:"60%"
 		},{
-			name:"demo2",
+			name:"PAMPERS",
 			value:12323,
-			percent:"40%"
+			percent:"5%"
 		},{
-			name:"demo3",
+			name:"DAWANG",
 			value:12323,
-			percent:"15%"
+			percent:"35%"
 		},{
-			name:"demo4",
+			name:"MUSTELA",
 			value:12323,
-			percent:"15%"
+			percent:"0%"
+		},{
+			name:"MAMYPOKO",
+			value:12323,
+			percent:"0%"
+		},{
+			name:"KAO",
+			value:12323,
+			percent:"0%"
 		}]
 	}
 }
