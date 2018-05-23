@@ -1,0 +1,22 @@
+{
+  "QuadrantDiagram":
+  {
+    "pointValueX_median": 66,
+    "pointValueY_median": 16,
+    "titleX": "Impression",
+    "titleY": "Click",
+    "pointValueX_mean": 1654.782,
+    "pointValueY_mean": 12.4112,
+    "optionData": [
+      [335, 39],
+      [20, 1],
+      [1, 0],
+      [3, 2],
+      [5, 0],
+      [7, 2],
+      [120, 6],
+      [2211, 40]
+    ]
+  },
+  "Message": "Success"
+}

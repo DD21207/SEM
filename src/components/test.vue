@@ -14,12 +14,13 @@
                     <li><a href="javascript:void(0);" data-type="quadrant.qMedian">中位数</a></li>
                     <!--<li><a href="javascript:void(0);" data-i18n="custom">自定义</a></li>-->
                 </ul>
-                {{plotLineValue.y}}
+                <!-- {{plotLineValue.y}} -->
         </div>
     </div>
     <div class="highcharts-container" id="test">
       
     </div>
+    <tableCustom :tableData='tableData' :tableHead="tableHead" :Tid="'table_id'"></tableCustom>
     
   </div>
 </template>
@@ -30,6 +31,8 @@ import HighchartsMore from 'highcharts/highcharts-more';
 import HighchartsDrilldown from 'highcharts/modules/drilldown';
 import Highcharts3D from 'highcharts/highcharts-3d';
 import { extend, isNull } from 'underscore';
+import tableCustom from '@/components/tableCustom';
+
 HighchartsMore(Highcharts)
 HighchartsDrilldown(Highcharts);
 Highcharts3D(Highcharts);
@@ -39,6 +42,8 @@ export default {
   name: 'highchartsTest',
   data() {
     return {
+      tableData:[],
+      tableHead:[],
       chart: null,
       plotAreas : null,
       plotArea : null,
@@ -135,6 +140,9 @@ export default {
       },
     }
   },
+  components: {
+      tableCustom
+  },
   mounted() {
     this.$nextTick(function() {
       this.initChart();
@@ -227,7 +235,26 @@ export default {
                   points.push(p);
               }
           });
-          console.log(points, points.length);
+          
+
+          //选象限更新表格
+          _this.$http({
+                    method:'get',
+                    url:'static/data/Custom2.json',
+                    // data:{
+                    //     'adminv':"",
+                    //     'passv':"",
+                    //     'type':'Logout'
+                    // }
+                }).then(response =>{
+                    if(response.data.Message == "Success"){
+                      
+                      _this.tableHead = response.data.Header;
+                       _this.tableData = response.data.QuadrantDiagram;
+
+
+                    }
+                })
       });
 
       var nav = document.getElementById('navigator');
@@ -240,7 +267,6 @@ export default {
       };
 
       $(".view_filter_item li a").click(function(){
-
         $(".view_filter_item li a").removeClass('cur');
         $(this).addClass('cur');
         if($(this).attr("data-type") == "quadrant.qAvg"){
@@ -359,23 +385,53 @@ export default {
           console.log(points, points.length);
     },
     test(){
-      this.chart.update({
+      var _this = this;
+      _this.chart.series[0].setData(_this.options.optionData);
+      _this.plotLineValue.x = _this.options.pointValueX_mean;
+      _this.plotLineValue.y = _this.options.pointValueY_mean;
+      console.log(_this.plotLineValue.y)
+      _this.plotAreas = null;
+      if(_this.rect) {
+        _this.rect.destroy();
+        _this.rect=null;
+      }
+      _this.chart.update({
          xAxis: {
-            title: {
-              text: this.options.titleX
-            }
+            plotLines: [{
+              value:_this.options.pointValueX_mean,
+              width: 1,
+              zIndex: 2,
+              color: '#000'
+            }]
          },
          yAxis: {
-            title: {
-              text: this.options.titleY
-            }
+            plotLines: [{
+            value:_this.options.pointValueY_mean,
+            width: 1,
+            zIndex: 2,
+            color: '#000'
+          }]
          },
       })
+      // this.chart.update({
+      //    xAxis: {
+      //       title: {
+      //         text: this.options.titleX
+      //       }
+      //    },
+      //    yAxis: {
+      //       title: {
+      //         text: this.options.titleY
+      //       }
+      //    },
+      // })
     }
   },
   watch:{
         'options.titleX': 'test',
         'options.titleY': 'test',
+        // 'options.pointValueX_mean' : 'test',
+        // 'options.pointValueY_mean' : 'test',
 
   },
 }

@@ -1,0 +1,57 @@
+{
+  "Header":[{
+    "value" : "Keyword"
+  },{
+    "value" : "Impression"
+  },{
+    "value" : "Click"
+  },{
+    "value" : "Spending"
+  },{
+    "value" : "CTR"
+  },{
+    "value" : "CPC"
+  },{
+    "value" : "SOIest"
+  },{
+    "value" : "SOSest"
+  },{
+    "value" : "BounceRate"
+  },{
+    "value" : "Visit"
+  },{
+    "value" : "平均访问页面"
+  },{
+    "value" : "平均停留时间"
+  }],
+  "QuadrantDiagram": [
+  {
+    "Keyword": "clearblue",
+    "Impression": 335,
+    "Click": 39,
+    "Spending": 78.83,
+    "CTR": 11.64,
+    "CPC": 2.02,
+    "SOIest": 15,
+    "SOSest": 18.61,
+    "BounceRate": 0,
+    "Visit": 31,
+    "平均访问页面": 3.42,
+    "平均停留时间": 207.26
+  },
+  {
+    "Keyword": "clearblue 排卵",
+    "Impression": 20,
+    "Click": 1,
+    "Spending": 0.54,
+    "CTR": 5,
+    "CPC": 0.54,
+    "SOIest": 15,
+    "SOSest": 0,
+    "BounceRate": 0,
+    "Visit": 0,
+    "平均访问页面": 0,
+    "平均停留时间": 0
+  }],
+  "Message": "Success"
+}
